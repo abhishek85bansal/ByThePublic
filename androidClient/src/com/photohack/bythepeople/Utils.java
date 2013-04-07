@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
@@ -41,7 +42,7 @@ import org.json.JSONObject;
 public final class Utils {
 
   private static final String MY_ACCESS_KEY_ID = "AKIAIGE3LGCGLXS3XOAA";
-  private static final String MY_SECRET_KEY = "6rzaO7NtGx2pBYwBswsBpfrT0es64c8ncew74qI";
+  private static final String MY_SECRET_KEY = "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";
   private static final String AWS_INCIDENT_UPLOAD_URL =
       "http://ec2-54-224-126-216.compute-1.amazonaws.com:8080/servicearchitecture/rest/incident/new";
   private static final String MY_BUCKET = "bythepublic";  // This bucket was manually created using AWS console.
@@ -62,10 +63,16 @@ public final class Utils {
     // Reference: https://developer.amazon.com/post/Tx1E7YWEXPSDRNO/How-To-Use-the-Amazon-SDK-for-Android-to-Upload-Photos-to-Amazon-S3.html
     String videoName = new BigInteger(130, random).toString(32);
     AmazonS3Client s3Client = new AmazonS3Client(new BasicAWSCredentials(MY_ACCESS_KEY_ID, MY_SECRET_KEY));
+    //try {
+    //  s3Client.createBucket(MY_BUCKET);
+    //} catch (AmazonServiceException e) {
+    //  e.printStackTrace();
+    //  Log.d(LaunchActivity.TAG, "Continuing after exception");
+    //}
     s3Client.putObject(MY_BUCKET, videoName, new File(path));
     GeneratePresignedUrlRequest urlRequest = new GeneratePresignedUrlRequest(MY_BUCKET, videoName);
-    // Added 100 years worth of milliseconds to the current time.
-    urlRequest.setExpiration(new Date(System.currentTimeMillis() + 100 * 365 * 24 * 3600 * 1000L));
+    // FIXME: This should be long enough (something like 1 year).
+    urlRequest.setExpiration(new Date(System.currentTimeMillis() + 10 * 3600 * 1000L));
     try {
       URL url = s3Client.generatePresignedUrl(urlRequest);
       return url.toURI().toString();
