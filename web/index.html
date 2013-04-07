@@ -41,8 +41,9 @@
                     '</li>';
                 $("#feedlist").html(html);
             },
-            error: function(xhr, status, error) { 
-                $("#feedlist").html("Error loading feeds!");
+            error: function(xhr, status, error) {
+                alert(error); 
+                //$("#feedlist").html("Error loading feeds!");
                 clearTimeout(timeout);
             }
         });
@@ -95,10 +96,8 @@
             <li>
                 <img src="img/crimetape.jpg" alt="image" width="424" height="283" /><br/>
                 <p class="description">Caption here</p>
-                <!-- FB Like button -->
-                <div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div>
-                <!-- FB Share button -->
-                <button>Share</button>
+                <!-- FB Like and Send button -->
+                <div class="fb-like" data-href="http://philster.x10.bz/phd4/" data-send="true" data-layout="button_count" data-width="450" data-show-faces="true"></div>
                 <button>Report Spam</button>
             </li>
         </ul>
