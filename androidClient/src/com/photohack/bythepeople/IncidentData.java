@@ -5,7 +5,10 @@ public class IncidentData {
 
 	private double latitude;
 	private double longitude;
+  // local path.
 	private String videoFile;
+  // remote url.
+  private String videoUri;
 	private String note;
 	public double getLatitude() {
 		return latitude;
@@ -31,7 +34,10 @@ public class IncidentData {
 	public void setNote(String note) {
 		this.note = note;
 	}
-
-
-
+  public void setVideoUri(String videoUri) {
+    this.videoUri = videoUri;
+  }
+  public String getVideoUri() {
+    return videoUri;
+  }
 }

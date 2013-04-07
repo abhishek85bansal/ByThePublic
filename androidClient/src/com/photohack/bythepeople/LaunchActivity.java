@@ -74,13 +74,6 @@ public class LaunchActivity extends Activity
         Toast.makeText(LaunchActivity.this, "Video recording is not available on this device.",
             Toast.LENGTH_SHORT).show();
       } else {
-        // Delete this before submission.
-        if (DEBUG_TEST_DROPBOX_UPLOAD) {
-          String localUri = "/external/video/media/1562";
-          DropboxHelper.uploadFile(localUri);
-          return;
-        }
-        // TODO: uncomment this.
         Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
         startActivityForResult(takeVideoIntent, VIDEO);
       }

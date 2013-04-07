@@ -1,8 +1,5 @@
 package com.photohack.bythepeople;
 
-
-import com.photohack.bythepeople.R;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.concurrent.ExecutionException;
 
 public class NotesActivity extends Activity implements LocationListener{
 
@@ -84,25 +83,37 @@ public class NotesActivity extends Activity implements LocationListener{
     if (path == null) {
       Log.e(LaunchActivity.TAG, "Video path is null, canceling the report upload process.");
     } else {
-      final String uploadUri = DropboxHelper.uploadFile(path);
+      UploadVideoTask videoUploader = new UploadVideoTask();
+      videoUploader.execute(new String[] { path });
+      String uploadUri = null;
+      try {
+        uploadUri = videoUploader.get();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+        Log.e(LaunchActivity.TAG, "video uploading failed.");
+      } catch (ExecutionException e) {
+        e.printStackTrace();
+        Log.e(LaunchActivity.TAG, "video uploading failed.");
+      }
       if (uploadUri == null) {
-        Log.e(LaunchActivity.TAG, "Upload failed.");
+        Log.e(LaunchActivity.TAG, "Video uploading failed.");
       } else {
-        Log.d(LaunchActivity.TAG, "Video upload succeeded.");
+        Log.d(LaunchActivity.TAG, "Video uploading succeeded.");
+        incidentData.setVideoUri(uploadUri);
         // Do network operations on a new thread to avoid networkonmainthread
         // exception.
-        Thread thread = new Thread(new Runnable(){
-            @Override
-            public void run() {
-              try {
-                if (Utils.uploadReport(incidentData, uploadUri)) {
-                  Log.d(LaunchActivity.TAG, "Report upload succeeded.");
-                }
-              } catch (Exception e) {
-                e.printStackTrace();
-              }
-          }});
-        thread.start(); 
+        UploadIncidentDataTask incidentUplader = new UploadIncidentDataTask();
+        incidentUplader.execute(new IncidentData[] { incidentData });
+        boolean success = false;
+        try {
+          success = incidentUplader.get();
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+          Log.e(LaunchActivity.TAG, "incident data uploading failed.");
+        } catch (ExecutionException e) {
+          e.printStackTrace();
+          Log.e(LaunchActivity.TAG, "incident data uploading failed.");
+        }
       }
     }
 	}
@@ -120,7 +131,6 @@ public class NotesActivity extends Activity implements LocationListener{
 		Toast.makeText(getApplicationContext(), "Latitude:" + lat + " Longitude: " + lng, Toast.LENGTH_LONG).show();
 		dataToSend.setLatitude(lat);
 		dataToSend.setLongitude(lng);
-		
 	}
 
 	@Override
