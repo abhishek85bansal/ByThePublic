@@ -95,9 +95,7 @@ public class NotesActivity extends Activity implements LocationListener{
         e.printStackTrace();
         Log.e(LaunchActivity.TAG, "video uploading failed.");
       }
-      if (uploadUri == null) {
-        Log.e(LaunchActivity.TAG, "Video uploading failed.");
-      } else {
+      if (uploadUri != null) {
         Log.d(LaunchActivity.TAG, "Video uploading succeeded.");
         incidentData.setVideoUri(uploadUri);
         // Do network operations on a new thread to avoid networkonmainthread
