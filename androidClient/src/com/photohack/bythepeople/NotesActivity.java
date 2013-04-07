@@ -84,7 +84,7 @@ public class NotesActivity extends Activity implements LocationListener{
       Log.e(LaunchActivity.TAG, "Video path is null, canceling the report upload process.");
     } else {
       UploadVideoTask videoUploader = new UploadVideoTask();
-      videoUploader.execute(new String[] { path });
+      videoUploader.execute(path);
       String uploadUri = null;
       try {
         uploadUri = videoUploader.get();
@@ -101,7 +101,7 @@ public class NotesActivity extends Activity implements LocationListener{
         // Do network operations on a new thread to avoid networkonmainthread
         // exception.
         UploadIncidentDataTask incidentUplader = new UploadIncidentDataTask();
-        incidentUplader.execute(new IncidentData[] { incidentData });
+        incidentUplader.execute(incidentData);
         boolean success = false;
         try {
           success = incidentUplader.get();

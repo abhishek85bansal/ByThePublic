@@ -41,7 +41,7 @@ import org.json.JSONObject;
 public final class Utils {
 
   private static final String MY_ACCESS_KEY_ID = "AKIAIGE3LGCGLXS3XOAA";
-  private static final String MY_SECRET_KEY = "6rzaO7NtGx2pBYwBswsBpfrT0es64c8ncew74qI";
+  private static final String MY_SECRET_KEY = "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";
   private static final String AWS_INCIDENT_UPLOAD_URL =
       "http://ec2-54-224-126-216.compute-1.amazonaws.com:8080/servicearchitecture/rest/incident/new";
   private static final String MY_BUCKET = "bythepublic";  // This bucket was manually created using AWS console.
@@ -62,6 +62,7 @@ public final class Utils {
     // Reference: https://developer.amazon.com/post/Tx1E7YWEXPSDRNO/How-To-Use-the-Amazon-SDK-for-Android-to-Upload-Photos-to-Amazon-S3.html
     String videoName = new BigInteger(130, random).toString(32);
     AmazonS3Client s3Client = new AmazonS3Client(new BasicAWSCredentials(MY_ACCESS_KEY_ID, MY_SECRET_KEY));
+    // s3Client.createBucket(MY_BUCKET);
     s3Client.putObject(MY_BUCKET, videoName, new File(path));
     GeneratePresignedUrlRequest urlRequest = new GeneratePresignedUrlRequest(MY_BUCKET, videoName);
     // Added 100 years worth of milliseconds to the current time.
