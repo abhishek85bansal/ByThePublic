@@ -20,6 +20,8 @@
   
   <!-- User-generated js -->
   <script type="text/javascript">
+    var foursquareVenues;
+
     function createMarker(myLatlng, map) {
       var infoWindowContent = document.createElement('div');
       infoWindowContent.setAttribute("class", "infoWindowContent");
@@ -38,6 +40,11 @@
       });
       headTextNode.setAttribute("style", "font-weight:bold; font-size:20px;");
       infoWindowContent.appendChild(headTextNode);
+
+      var foursquareNode = document.createElement('div');
+      foursquareNode.appendChild(document.createTextNode("FourSquare data : near " + foursquareVenues.name + " (" + foursquareVenues.location.distance + "m)"));
+      foursquareNode.setAttribute("style", "color:darkcyan; font-weight:bold; font-size:14px;");
+      infoWindowContent.appendChild(foursquareNode);
 
       var crimeImage = document.createElement('img');
       crimeImage.setAttribute("src", "img/crimetape.jpg");
@@ -117,8 +124,16 @@
       var map = new google.maps.Map(document.getElementById("map-canvas"),
 	  mapOptions);
 
+      // retrieve venues from Foursquare
+      $.getJSON("https://api.foursquare.com/v2/venues/search?ll=37.5,-122&client_id=VUQJH4RJCUCRWTTB43QJ5M5CPAFJXBI02M1ALM0SF5LARMW3&client_secret=GLUFLMANAZZESX4RRLQICFLJBXKWG1YDI22VLGURFRVXME0J&v=20130407", function(data){
+          console.log("Venues: " + data.response.venues);
+          foursquareVenues = data.response.venues[0];
+
+          createMarker(myLatlng, map);
+      });
+
       //TODO: loop for all markers
-      createMarker(myLatlng, map);
+      //createMarker(myLatlng, map);
     }
     $(document).ready(function() {
       initializeMap();
