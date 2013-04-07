@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <title>By The People</title>
+  <link rel="stylesheet" href="css/my.css" />
+  <script src="js/jquery-1.9.1.min.js"></script>
+  <script src="js/my.js"></script>
+
+  <!-- User-generated css -->
+  <style>
+    ul {
+        list-style: none;
+    }
+  </style>
+
+  <!-- User-generated js -->
+  <script type="text/javascript">
+
+    var timeout;
+
+    function refreshFeed(){
+        $.ajax({
+            type: "GET",
+            url: "/feeds",
+            //data: "{empid: " + empid + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(response) {
+                alert(response.d);
+                var html = '<li>' +
+                    '    <img src="img/crimetape.jpg" alt="image" width="424" height="283" /><br/>' +
+                    '    <p class="description">Caption here</p>' +
+                    '    <button>Like</button>' +
+                    '    <button>Share</button>' +
+                    '    <button>Report Spam</button>' +
+                    '</li>';
+                $("#feedlist").html(html);
+            },
+            error: function(xhr, status, error) { 
+                $("#feedlist").html("No current feeds!");
+                //alert(error);
+                clearTimeout(timeout);
+            }
+        );
+        timeout = setTimeout(refreshFeed, 2000);
+    }
+
+    $(function() {
+        refreshFeed();
+
+    });
+
+  </script>
+
+</head>
+<body>
+
+<h1 class="logo">Logo</h1>
+<h2>By The People</h2>
+<ul class="nav">
+    <li><a href="#">Live Feeds</a></li>
+    <li><a href="#">Map</a></li>
+    <li><a href="#">Communities</a></li>
+    <li><a href="#">Feedback</a></li>
+</ul>
+
+<div class="container">
+    <!-- Maps -->
+    <div class="content">
+        <p>Map content here</p>
+    </div>
+
+    <!-- Live Feeds -->
+    <div class="content">
+        <div class="search">
+            <label for="searchinput">
+            </label>
+            <input name="q" id="searchinput" placeholder="Search by zip code or time"
+            value="" type="search">
+        </div>
+
+        <ul id="feedlist">
+            <li>
+                <img src="img/crimetape.jpg" alt="image" width="424" height="283" /><br/>
+                <p class="description">Caption here</p>
+                <button>Like</button>
+                <button>Share</button>
+                <button>Report Spam</button>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Feedback -->
+    <div class="content">
+        <form>
+            <p>
+              Thank you for relying on our efforts to make our community safe, sound,
+              and clean. We appreciate your expert suggestions to help us with our intentions.
+              Please contact us through the feedback form below.
+            </p>
+            <input name="fullname" placeholder="Please enter your full name"
+            value="" type="text"><br/>
+            <input name="email" placeholder="Please enter your email" value=""
+            type="email"><br/>
+            <textarea name="message" placeholder="Message (limit 500 words)"></textarea>
+            <input type="submit" value="Submit"/>
+        </form>
+    </div>
+
+</div>
+
+
+</body>
+</html>
