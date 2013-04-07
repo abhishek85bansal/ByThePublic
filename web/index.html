@@ -74,11 +74,28 @@
       crimeImage.setAttribute("style", "float:left;");
       spamButton.appendChild(document.createTextNode("Report Spam"));
       infoWindowContent.appendChild(spamButton);
-
+      
+      <!-- filepicker -->
+      
+      exportFilePickerFunction = function(){filepicker.exportFile(
+    		  'https://drpyjw32lhcoa.cloudfront.net/31a6769/img/success.png',
+    		  {mimetype:'image/png'},
+    		  function(FPFile){
+    		    console.log(FPFile.url);
+    		});}
+      
+      filepicker.setKey('As6GyMWuSWWBmnBPw0p0wz');
+      var filePickerButton = document.createElement('button');
+      filePickerButton.setAttribute("onclick", "exportFilePickerFunction()");
+      crimeImage.setAttribute("style", "float:left;");
+      filePickerButton.appendChild(document.createTextNode("FilePicker Save"));
+      infoWindowContent.appendChild(filePickerButton);
+      
+      
       var infoWindow = new google.maps.InfoWindow({
-	position: myLatlng,
-	content: infoWindowContent,
-	zindex: 1000
+	  position: myLatlng,
+	  content: infoWindowContent,
+	  zindex: 1000
       });
 
       var marker = new google.maps.Marker({
@@ -189,8 +206,8 @@
         <div id="map-canvas"></div>
     </div>
     <br/>
-
 </div>
-
+<!-- Script for filepicker -->
+  <script type="text/javascript" src="http://api.filepicker.io/v1/filepicker.js"></script>
 </body>
 </html>
