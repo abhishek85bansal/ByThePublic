@@ -38,10 +38,10 @@ public final class R {
     }
     public static final class id {
         public static final int action_settings=0x7f08000a;
-        public static final int cancel=0x7f080004;
-        public static final int done=0x7f080005;
+        public static final int cancel=0x7f080003;
+        public static final int done=0x7f080004;
         public static final int gridview=0x7f080000;
-        public static final int notes_edittext=0x7f080003;
+        public static final int notes_edittext=0x7f080005;
         public static final int record_btn=0x7f080001;
         public static final int record_text=0x7f080002;
         public static final int thu_img=0x7f080006;

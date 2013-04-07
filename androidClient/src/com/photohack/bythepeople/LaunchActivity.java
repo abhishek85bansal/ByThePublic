@@ -19,7 +19,7 @@ public class LaunchActivity extends Activity
     public static final int VIDEO = 0;
     public static final int PHOTO = 1;
     public static final int NOTES = 2;
-    public static final String TAG = "ByThePeople";
+    public static final String TAG = "ByThePublic";
     private Button captureButton;
     /** Called when the activity is first created. */
     @Override
@@ -55,9 +55,9 @@ public class LaunchActivity extends Activity
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
       if (resultCode != Activity.RESULT_CANCELED) {
         if (requestCode == VIDEO) {
-        	TakeNotes();
           Uri videoUri = data.getData();
-          // TODO: what to do after getting the video?
+          Log.d(TAG, "videoUri is " + videoUri);
+        	TakeNotes(videoUri.toString());
         }  else {
           Log.e(TAG, "Unknown request code: " + requestCode);
         }
@@ -87,8 +87,9 @@ public class LaunchActivity extends Activity
       }
     }
 
-    private void TakeNotes() {
+    private void TakeNotes(String videoUri) {
       Intent i = new Intent(this, NotesActivity.class);
+      i.putExtra("" + VIDEO, videoUri);
       startActivity(i);
       finish();
     }

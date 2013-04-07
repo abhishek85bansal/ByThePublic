@@ -4,15 +4,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/notes_edittext"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:hint="@string/notes_hint"
-        android:focusable="true"
-        android:minLines="10" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,5 +29,14 @@
             android:background="@drawable/go_button"
             android:text="@string/notes_done" />
     </RelativeLayout>
+
+    <EditText
+        android:id="@+id/notes_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:hint="@string/notes_hint"
+        android:focusable="true"
+        android:minLines="10" />
 
 </LinearLayout>
