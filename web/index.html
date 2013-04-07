@@ -7,10 +7,86 @@
   <link rel="stylesheet" href="css/bootstrap.css" type="text/css" media="screen" />
   <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   <script src="js/jquery-1.9.1.min.js"></script>
-    
+  <script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjsMQKzBj1D631kw3mb-t6B1hY791FhPs&sensor=true">
+  </script>
+
   <!-- User-generated css -->
+  <style type="text/css">
+    #map-canvas { height: 500px }
+  </style>
   
   <!-- User-generated js -->
+  <script type="text/javascript">
+    function createMarker(myLatlng, map) {
+      var infoWindowContent = document.createElement('div');
+      infoWindowContent.setAttribute("class", "infoWindowContent");
+      infoWindowContent.setAttribute("style", "font-family:arial; overflow:auto; margin-top:5px;");
+
+      var headTextNode = document.createElement('div');
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode({'latLng': myLatlng}, function(results, status) {
+	if (status == google.maps.GeocoderStatus.OK) {
+	  if (results[0]) {
+	    headTextNode.appendChild(document.createTextNode(results[0].formatted_address));
+	  }
+	} else {
+	  headTextNode.appendChild(document.createTextNode("Details:"));
+	}
+      });
+      headTextNode.setAttribute("style", "font-weight:bold; font-size:20px;");
+      infoWindowContent.appendChild(headTextNode);
+
+      var crimeImage = document.createElement('img');
+      crimeImage.setAttribute("src", "img/crimetape.jpg");
+      crimeImage.setAttribute("style", "height:320; width:320px;");
+      infoWindowContent.appendChild(crimeImage);
+
+      var crimeVideo = document.createElement('video');
+      crimeVideo.setAttribute("width", 320);
+      crimeVideo.setAttribute("controls", "");
+      var videoSourceMp4 = document.createElement('source');
+      videoSourceMp4.setAttribute("src", "New India Coca cola ad 2011 december_ Reasons to Believe hindi.mp4");
+      videoSourceMp4.setAttribute("type", "video/mp4");
+      crimeVideo.appendChild(videoSourceMp4);
+      infoWindowContent.appendChild(crimeVideo);
+
+      var optTextNode = document.createElement('div');
+      optTextNode.appendChild(document.createTextNode("Optional content here"));
+      infoWindowContent.appendChild(optTextNode);
+
+      var infoWindow = new google.maps.InfoWindow({
+	position: myLatlng,
+	content: infoWindowContent,
+	zindex: 1000
+      });
+
+      var marker = new google.maps.Marker({
+	position: myLatlng
+      });
+
+      marker.setMap(map);
+      marker.addListener('click', function(){infoWindow.open(map)});
+    }
+
+    function initialize() {
+      var myLatlng = new google.maps.LatLng(37.483513540485,-122.14942535723);
+      
+      var mapOptions = {
+	center: myLatlng,
+	zoom: 12,
+	mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      var map = new google.maps.Map(document.getElementById("map-canvas"),
+	  mapOptions);
+
+      //TODO: loop for all markers
+      createMarker(myLatlng, map);
+    }
+    $(document).ready(function() {
+      initialize();
+    });
+  </script>
   <script type="text/javascript">
 
     var timeout;
@@ -76,7 +152,7 @@
     <!-- Maps -->
     <div id="map" class="well">
         <h2>Map for the incidences</h2>
-        <p>Map content here</p>
+        <div id="map-canvas"></div>
     </div>
     <br/>
     
