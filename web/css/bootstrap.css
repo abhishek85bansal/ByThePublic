@@ -228,6 +228,7 @@ body {
   line-height: 20px;
   color: #333333;
   background-color: #ffffff;
+  background-image: url("../img/Detective_Bond/Web/bg.png");
 }
 
 a {
@@ -3890,9 +3891,11 @@ input[type="submit"].btn.btn-mini {
 }
 
 .nav {
-  margin-bottom: 20px;
-  margin-left: 0;
+  margin: 0px auto;
   list-style: none;
+  align: center;
+  background-image: url("../img/Detective_Bond/Web/bg_nav.png");	
+  background-repeat:repeat-x;
 }
 
 .nav > li > a {
@@ -6037,3 +6040,5 @@ a.badge:hover {
 .affix {
   position: fixed;
 }
+
+<!-- User Added CSS from here -->

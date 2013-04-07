@@ -4,35 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <title>By The People</title>
-  <link rel="stylesheet" href="css/my.css" />
+  <link rel="stylesheet" href="css/bootstrap.css" type="text/css" media="screen" />
+  <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   <script src="js/jquery-1.9.1.min.js"></script>
-  <script src="js/my.js"></script>
     
   <!-- User-generated css -->
-  <style>
-    div.container {
-        clear: both;
-    }
-    ul#feedlist {
-        list-style: none;
-    }
-    ul.nav {
-        list-style: none;
-    }
-    ul.nav li {
-        border-left: 1px solid black;
-        display: block;
-        float: left;
-        padding: 5px;
-    }
-    ul.nav li:first-child {
-        border: none;
-    }
-    .fb-like {
-        float: left;
-    }
-  </style>
-
+  
   <!-- User-generated js -->
   <script type="text/javascript">
 
@@ -76,35 +53,40 @@
 
 <!-- facebook integration code -->
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=496562937069311";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-<h1 class="logo">Logo</h1>
-<h2>By The People</h2>
-<ul class="nav">
-    <li><a href="index.html">Live Feeds</a></li>
-    <li><a href="#">Map</a></li>
-    <li><a href="#">Communities</a></li>
-    <li><a href="feedback.html">Feedback</a></li>
-</ul>
-
+  <script>
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=496562937069311";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+   </script>
+   
 <div class="container">
+    <!-- #wrapper -->
+    
+     <div class="nav">
+       <img src="img/Detective_Bond/Web/img_logo2.png" alt="detective logo">
+       <img src="img/Detective_Bond/Web/title.png" alt="From The Public logo">
+       <a class="btn btn-info" style="float:right; margin-top:15px; margin-right:15px;">Feedback</a>
+       </div>
+    
+   
     <!-- Maps -->
-    <div class="content">
+    <div id="map" class="well">
+        <h2>Map for the incidences</h2>
         <p>Map content here</p>
     </div>
-
+    <br/>
+    
     <!-- Live Feeds -->
+    <h2>Live Feeds</h2>
     <div class="content">
-        <div class="search">
+        <!-- <div class="search">
             <input name="q" id="searchinput" placeholder="Search by zip code or time"
             value="" type="search">
-        </div>
+        </div> -->
 
         <ul id="feedlist">
             <li>
@@ -116,9 +98,7 @@
             </li>
         </ul>
     </div>
-
 </div>
-
 
 </body>
 </html>
