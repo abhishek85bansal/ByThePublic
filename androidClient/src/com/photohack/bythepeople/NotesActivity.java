@@ -48,12 +48,12 @@ public class NotesActivity extends Activity implements LocationListener{
 				startThankYouAction();
 				finish();
 			}});
-		Button cancelBtn  = (Button)findViewById(R.id.cancel);
-		cancelBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			}});
+//		Button cancelBtn  = (Button)findViewById(R.id.cancel);
+//		cancelBtn.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				finish();
+//			}});
 
 		// location stuff
 		// Get the location manager
