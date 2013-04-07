@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 public class NotesActivity extends Activity implements LocationListener{
 
-	/** Called when the activity is first created. */
 	private LocationManager locationManager;
 	private String provider;
 	private IncidentData dataToSend;
@@ -75,19 +74,35 @@ public class NotesActivity extends Activity implements LocationListener{
 		}
 	}
 
-	public void submitNoteAndVideo(IncidentData incidentData) {
+	public void submitNoteAndVideo(final IncidentData incidentData) {
     // In weird case, videoPath might be null.
     // TODO: submit location as well.
     String path = incidentData.getVideoFile();
     String note = incidentData.getNote();
     Log.d(LaunchActivity.TAG, "video path is " + path
           + " and note is " + note);
-    if (path != null) {
-      String uploadUri = DropboxHelper.uploadFile(path);
+    if (path == null) {
+      Log.e(LaunchActivity.TAG, "Video path is null, canceling the report upload process.");
+    } else {
+      final String uploadUri = DropboxHelper.uploadFile(path);
       if (uploadUri == null) {
         Log.e(LaunchActivity.TAG, "Upload failed.");
       } else {
         Log.d(LaunchActivity.TAG, "Video upload succeeded.");
+        // Do network operations on a new thread to avoid networkonmainthread
+        // exception.
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+              try {
+                if (Utils.uploadReport(incidentData, uploadUri)) {
+                  Log.d(LaunchActivity.TAG, "Report upload succeeded.");
+                }
+              } catch (Exception e) {
+                e.printStackTrace();
+              }
+          }});
+        thread.start(); 
       }
     }
 	}
@@ -102,7 +117,7 @@ public class NotesActivity extends Activity implements LocationListener{
 		double lat =  (location.getLatitude());
 		double lng = (long) (location.getLongitude());
 		System.out.println("Lat " + lat + " has been selected.");
-		Toast.makeText(getApplicationContext(), "Lat " + lat + "long " + lng, Toast.LENGTH_LONG).show();
+		Toast.makeText(getApplicationContext(), "Latitude:" + lat + " Longitude: " + lng, Toast.LENGTH_LONG).show();
 		dataToSend.setLatitude(lat);
 		dataToSend.setLongitude(lng);
 		
