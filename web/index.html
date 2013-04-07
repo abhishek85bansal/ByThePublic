@@ -4,41 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <title>By The People</title>
-  <link rel="stylesheet" href="css/my.css" />
+  <link rel="stylesheet" href="css/bootstrap.css" type="text/css" media="screen" />
+  <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   <script src="js/jquery-1.9.1.min.js"></script>
-  <script src="js/my.js"></script>
     
   <!-- User-generated css -->
-  <style>
-<<<<<<< HEAD
-    ul {
-        list-style: none;
-    }
-=======
-    div.container {
-        clear: both;
-    }
-    ul#feedlist {
-        list-style: none;
-    }
-    ul.nav {
-        list-style: none;
-    }
-    ul.nav li {
-        border-left: 1px solid black;
-        display: block;
-        float: left;
-        padding: 5px;
-    }
-    ul.nav li:first-child {
-        border: none;
-    }
->>>>>>> 4befeacb2fe61be8252250847f1fa77ad36e395d
-    .fb-like {
-        float: left;
-    }
-  </style>
-
+  
   <!-- User-generated js -->
   <script type="text/javascript">
 
@@ -47,11 +18,7 @@
     function refreshFeed(){
         $.ajax({
             type: "GET",
-<<<<<<< HEAD
-            url: "/feeds",
-=======
             url: "/servicearchitecture/rest/incident/top10",
->>>>>>> 4befeacb2fe61be8252250847f1fa77ad36e395d
             //data: "{empid: " + empid + "}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -66,14 +33,9 @@
                     '</li>';
                 $("#feedlist").html(html);
             },
-<<<<<<< HEAD
-            error: function(xhr, status, error) { 
-                $("#feedlist").html("Error loading feeds!");
-=======
             error: function(xhr, status, error) {
                 alert(error); 
                 //$("#feedlist").html("Error loading feeds!");
->>>>>>> 4befeacb2fe61be8252250847f1fa77ad36e395d
                 clearTimeout(timeout);
             }
         });
@@ -82,10 +44,6 @@
 
     $(function() {
         refreshFeed();
-<<<<<<< HEAD
-
-=======
->>>>>>> 4befeacb2fe61be8252250847f1fa77ad36e395d
     });
 
   </script>
@@ -95,59 +53,52 @@
 
 <!-- facebook integration code -->
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=496562937069311";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-<h1 class="logo">Logo</h1>
-<h2>By The People</h2>
-<ul class="nav">
-    <li><a href="index.html">Live Feeds</a></li>
-    <li><a href="#">Map</a></li>
-    <li><a href="#">Communities</a></li>
-    <li><a href="feedback.html">Feedback</a></li>
-</ul>
-
+  <script>
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=496562937069311";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+   </script>
+   
 <div class="container">
+    <!-- #wrapper -->
+    
+     <div class="nav">
+       <img src="img/Detective_Bond/Web/img_logo2.png" alt="detective logo">
+       <img src="img/Detective_Bond/Web/title.png" alt="From The Public logo">
+       <a class="btn btn-info" style="float:right; margin-top:15px; margin-right:15px;">Feedback</a>
+       </div>
+    
+   
     <!-- Maps -->
-    <div class="content">
+    <div id="map" class="well">
+        <h2>Map for the incidences</h2>
         <p>Map content here</p>
     </div>
-
+    <br/>
+    
     <!-- Live Feeds -->
+    <h2>Live Feeds</h2>
     <div class="content">
-        <div class="search">
+        <!-- <div class="search">
             <input name="q" id="searchinput" placeholder="Search by zip code or time"
             value="" type="search">
-        </div>
+        </div> -->
 
         <ul id="feedlist">
             <li>
-<<<<<<< HEAD
-                <img src="img/crimetape.jpg" alt="image" width="424" height="283" /><br/>
-                <p class="description">Caption here</p>
-                <!-- FB Like button -->
-                <div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div>
-                <!-- FB Share button -->
-                <button>Share</button>
-                <button>Report Spam</button>
-=======
                 <a href="#"><img src="img/crimetape.jpg" alt="image" width="424" height="283" /></a><br/>
                 <p class="description">Caption here</p>
                 <!-- FB Like and Send button -->
                 <div class="fb-like" data-href="http://philster.x10.bz/phd4/" data-send="true" data-layout="button_count" data-width="450" data-show-faces="true"></div>
                 <button onclick="alert('Spam reported.');return false;">Report Spam</button>
->>>>>>> 4befeacb2fe61be8252250847f1fa77ad36e395d
             </li>
         </ul>
     </div>
-
 </div>
-
 
 </body>
 </html>
