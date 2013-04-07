@@ -20,7 +20,8 @@
   
   <!-- User-generated js -->
   <script type="text/javascript">
-    function createMarker(myLatlng, map) {
+    var map;
+    function createMarker(myLatlng, url, description, map) {
       var infoWindowContent = document.createElement('div');
       infoWindowContent.setAttribute("class", "infoWindowContent");
       infoWindowContent.setAttribute("style", "font-family:arial; overflow:auto; margin-top:5px;");
@@ -39,22 +40,18 @@
       headTextNode.setAttribute("style", "font-weight:bold; font-size:20px;");
       infoWindowContent.appendChild(headTextNode);
 
-      var crimeImage = document.createElement('img');
-      crimeImage.setAttribute("src", "img/crimetape.jpg");
-      crimeImage.setAttribute("style", "height:320; width:320px;");
-      infoWindowContent.appendChild(crimeImage);
-
       var crimeVideo = document.createElement('video');
       crimeVideo.setAttribute("width", 320);
       crimeVideo.setAttribute("controls", "");
       var videoSourceMp4 = document.createElement('source');
-      videoSourceMp4.setAttribute("src", "sample.mp4");
+      videoSourceMp4.setAttribute("src", url);
       videoSourceMp4.setAttribute("type", "video/mp4");
       crimeVideo.appendChild(videoSourceMp4);
       infoWindowContent.appendChild(crimeVideo);
 
       var optTextNode = document.createElement('div');
-      optTextNode.appendChild(document.createTextNode("Optional content here"));
+      optTextNode.setAttribute("style", "margin-top:5px;");
+      optTextNode.appendChild(document.createTextNode(description));
       infoWindowContent.appendChild(optTextNode);
 
       var likeSendButton = document.createElement('div');
@@ -71,7 +68,7 @@
 
       var spamButton = document.createElement('button');
       spamButton.setAttribute("onclick", "alert('Spam reported.');return false;");
-      crimeImage.setAttribute("style", "float:left;");
+      spamButton.setAttribute("style", "float:left; margin-top:2px;");
       spamButton.appendChild(document.createTextNode("Report Spam"));
       infoWindowContent.appendChild(spamButton);
 
@@ -89,21 +86,30 @@
       marker.addListener('click', function(){infoWindow.open(map)});
     }
 
+    function helper(response) {
+      for (var i = 0; i < response.length; i++) {
+	var myLatlng = new google.maps.LatLng(parseInt(response[i].latitude), parseInt(response[i].longitude));
+	createMarker(myLatlng, response[i].url, response[i].description, map);
+      }
+    }
+
     function initializeMap() {
-      var myLatlng = new google.maps.LatLng(37.483513540485,-122.14942535723);
-      
+      $.ajax({
+	  type: "GET",
+	  url: "http://ec2-54-224-126-216.compute-1.amazonaws.com:8080/servicearchitecture/rest/incident/top10jsonp?callback=helper",
+	  //data: "{empid: " + empid + "}",
+	  contentType: "application/json; charset=utf-8",
+	  dataType: "jsonp"
+      });
+    }
+    $(document).ready(function() {
       var mapOptions = {
-	center: myLatlng,
+	center: new google.maps.LatLng(37.483513540485,-122.14942535723),
 	zoom: 12,
 	mapTypeId: google.maps.MapTypeId.ROADMAP
       };
-      var map = new google.maps.Map(document.getElementById("map-canvas"),
-	  mapOptions);
+      map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-      //TODO: loop for all markers
-      createMarker(myLatlng, map);
-    }
-    $(document).ready(function() {
       initializeMap();
     });
   </script>
