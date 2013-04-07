@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  android:id="@+id/gridview"
+  android:layout_width="fill_parent" 
+  android:layout_height="fill_parent"
+  android:columnWidth="90dp"
+  android:numColumns="1"
+  android:verticalSpacing="40dp"
+  android:horizontalSpacing="10dp"
+  android:stretchMode="columnWidth"
+  android:gravity="center"
+  android:background="@drawable/bg_nav"
+>
+
+    <Button
+        android:id="@+id/record_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/record_button"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/record_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/record_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:text="@string/record_text"
+        android:textSize="16sp" />
+
+</RelativeLayout>

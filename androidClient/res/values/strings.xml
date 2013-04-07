@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">By The People</string>
+    <string name="notes_done">Done</string>
+    <string name="notes_cancel">Cancel</string>
+    <string name="notes_hint">Enter the description of the incident here</string>
+    <string name="record_text">Record a video or take a photo</string>
+    <string name="thankyou_text">Thank You</string>
+    <string name="thankyou_text_desc"> You have helped someone out in need. Be proud of yourself. You are a good citizen!</string>
+	<string name="updates_text">Check for Updates</string>
+</resources>
