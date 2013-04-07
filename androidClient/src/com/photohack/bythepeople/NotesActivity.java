@@ -46,6 +46,7 @@ public class NotesActivity extends Activity implements LocationListener{
 				dataToSend.setNote(note);
 				submitNoteAndVideo(dataToSend);
 				startThankYouAction();
+				finish();
 			}});
 		Button cancelBtn  = (Button)findViewById(R.id.cancel);
 		cancelBtn.setOnClickListener(new View.OnClickListener() {
