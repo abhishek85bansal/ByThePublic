@@ -41,7 +41,7 @@
     function refreshFeed(){
         $.ajax({
             type: "GET",
-            url: "/feeds",
+            url: "/servicearchitecture/rest/incident/top10",
             //data: "{empid: " + empid + "}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
