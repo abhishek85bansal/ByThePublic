@@ -7,10 +7,11 @@
   <link rel="stylesheet" href="css/bootstrap.css" type="text/css" media="screen" />
   <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   <script src="js/jquery-1.9.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="js/bootstrap.js"></script>
   <script type="text/javascript"
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjsMQKzBj1D631kw3mb-t6B1hY791FhPs&sensor=true">
   </script>
-
   <!-- User-generated css -->
   <style type="text/css">
     #map-canvas { height: 500px }
@@ -139,23 +140,37 @@
     }(document, 'script', 'facebook-jssdk'));
    </script>
    
-<div class="container">
-    <!-- #wrapper -->
-    
+<!-- .container -->
+<div class="container">    
      <div class="nav">
        <img src="img/Detective_Bond/Web/img_logo2.png" alt="detective logo">
        <img src="img/Detective_Bond/Web/title.png" alt="From The Public logo">
-       <a class="btn btn-info" style="float:right; margin-top:15px; margin-right:15px;">Feedback</a>
+       <div class="modal hide fade" id="myModal" aria-hidden="true">
+         <div class="modal-header">
+           <h3>Please enter your feedback below</h3>
+         </div>         
+         <div class="modal-body">
+           <label>Email</label>
+           <input type="email" class="span4"/><br/>
+           <label>Description</label>
+           <textarea class="row-fluid">Enter your text here...</textarea><br/><br/>
+           <button type="button" class="btn btn-success">Send</button>
+           <button type="reset" class="btn">Clear</button>           
+         </div>         
+         <div class="modal-footer">
+           <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+         </div>
        </div>
+       <a href="#myModal" data-toggle="modal" class="btn btn-primary" style="float:right; margin-top:15px; margin-right:15px;">Feedback</a>
+     </div>
     
-   
-    <!-- Maps -->
+  <!-- Maps -->
     <div id="map" class="well">
         <h2>Map for the incidences</h2>
         <div id="map-canvas"></div>
     </div>
     <br/>
-    
+       
     <!-- Live Feeds -->
     <h2>Live Feeds</h2>
     <div class="content">
