@@ -4,6 +4,7 @@ import com.photohack.bythepeople.R;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,6 +21,8 @@ public class LaunchActivity extends Activity
     public static final int PHOTO = 1;
     public static final int NOTES = 2;
     public static final String TAG = "ByThePublic";
+    // This must be set to false before submitting code to repo.
+    private static final boolean DEBUG_TEST_DROPBOX_UPLOAD = false;
     private Button captureButton;
     /** Called when the activity is first created. */
     @Override
@@ -57,7 +60,7 @@ public class LaunchActivity extends Activity
         if (requestCode == VIDEO) {
           Uri videoUri = data.getData();
           Log.d(TAG, "videoUri is " + videoUri);
-        	TakeNotes(videoUri.toString());
+        	TakeNotes(getPath(videoUri));
         }  else {
           Log.e(TAG, "Unknown request code: " + requestCode);
         }
@@ -71,6 +74,13 @@ public class LaunchActivity extends Activity
         Toast.makeText(LaunchActivity.this, "Video recording is not available on this device.",
             Toast.LENGTH_SHORT).show();
       } else {
+        // Delete this before submission.
+        if (DEBUG_TEST_DROPBOX_UPLOAD) {
+          String localUri = "/external/video/media/1562";
+          DropboxHelper.uploadFile(localUri);
+          return;
+        }
+        // TODO: uncomment this.
         Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
         startActivityForResult(takeVideoIntent, VIDEO);
       }
@@ -87,10 +97,19 @@ public class LaunchActivity extends Activity
       }
     }
 
-    private void TakeNotes(String videoUri) {
+    private void TakeNotes(String videoPath /* not uri */) {
       Intent i = new Intent(this, NotesActivity.class);
-      i.putExtra("" + VIDEO, videoUri);
+      i.putExtra("" + VIDEO, videoPath);
       startActivity(i);
       finish();
+    }
+
+    private String getPath(Uri uri) {
+      String[] projection = { MediaStore.Images.Media.DATA };
+      Cursor cursor = managedQuery(uri, projection, null, null, null);
+      startManagingCursor(cursor);
+      int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+      cursor.moveToFirst();
+      return cursor.getString(column_index);
     }
 }

@@ -15,4 +15,5 @@ public final class Utils {
         PackageManager.MATCH_DEFAULT_ONLY);
     return list.size() > 0;
   }
+
 }
