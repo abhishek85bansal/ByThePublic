@@ -10,8 +10,23 @@
     
   <!-- User-generated css -->
   <style>
-    ul {
+    div.container {
+        clear: both;
+    }
+    ul#feedlist {
         list-style: none;
+    }
+    ul.nav {
+        list-style: none;
+    }
+    ul.nav li {
+        border-left: 1px solid black;
+        display: block;
+        float: left;
+        padding: 5px;
+    }
+    ul.nav li:first-child {
+        border: none;
     }
     .fb-like {
         float: left;
@@ -52,7 +67,6 @@
 
     $(function() {
         refreshFeed();
-
     });
 
   </script>
@@ -94,11 +108,11 @@
 
         <ul id="feedlist">
             <li>
-                <img src="img/crimetape.jpg" alt="image" width="424" height="283" /><br/>
+                <a href="#"><img src="img/crimetape.jpg" alt="image" width="424" height="283" /></a><br/>
                 <p class="description">Caption here</p>
                 <!-- FB Like and Send button -->
                 <div class="fb-like" data-href="http://philster.x10.bz/phd4/" data-send="true" data-layout="button_count" data-width="450" data-show-faces="true"></div>
-                <button>Report Spam</button>
+                <button onclick="alert('Spam reported.');return false;">Report Spam</button>
             </li>
         </ul>
     </div>
