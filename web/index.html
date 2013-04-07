@@ -69,7 +69,7 @@
       marker.addListener('click', function(){infoWindow.open(map)});
     }
 
-    function initialize() {
+    function initializeMap() {
       var myLatlng = new google.maps.LatLng(37.483513540485,-122.14942535723);
       
       var mapOptions = {
@@ -84,7 +84,7 @@
       createMarker(myLatlng, map);
     }
     $(document).ready(function() {
-      initialize();
+      initializeMap();
     });
   </script>
   <script type="text/javascript">
