@@ -7,4 +7,4 @@ ByThePublic
 # 
 
 
-This is the initial code base for ByThePublic App.
+This is the initial code base for ByThePublic App and server backend.

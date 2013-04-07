@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/thu_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/img_thankyou" />
+
+    <TextView
+        android:id="@+id/thu_thanks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/thu_img"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="53dp"
+        android:text="@string/thankyou_text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#566e28"
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/thu_thanks_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/thu_thanks"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:textSize="14sp"
+        android:padding="20dp"
+        android:text="@string/thankyou_text_desc" />
+
+    <Button
+        android:id="@+id/thu_thanks_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/thu_thanks_desc"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/go_button"
+        android:padding="10dp"
+        android:text="@string/updates_text"
+        android:textColor="@android:color/white" />
+
+</RelativeLayout>
