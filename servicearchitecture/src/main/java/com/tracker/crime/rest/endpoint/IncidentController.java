@@ -64,7 +64,7 @@ public class IncidentController {
 		
 		manager.addUpdateIncident(inc);
  
-		String output = "File uploaded to : " + uploadedFileLocation;
+		String output = uploadedFileLocation;
  
 		return output;
  
