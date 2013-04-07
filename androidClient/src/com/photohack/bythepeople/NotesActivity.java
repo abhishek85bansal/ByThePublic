@@ -69,51 +69,66 @@ public class NotesActivity extends Activity implements LocationListener{
 			onLocationChanged(location);
 		} else {
 			Toast.makeText(getApplicationContext(), "Location not available", Toast.LENGTH_SHORT).show();
-			
+
 		}
 	}
 
 	public void submitNoteAndVideo(final IncidentData incidentData) {
-    // In weird case, videoPath might be null.
-    // TODO: submit location as well.
-    String path = incidentData.getVideoFile();
-    String note = incidentData.getNote();
-    Log.d(LaunchActivity.TAG, "video path is " + path
-          + " and note is " + note);
-    if (path == null) {
-      Log.e(LaunchActivity.TAG, "Video path is null, canceling the report upload process.");
-    } else {
-      UploadVideoTask videoUploader = new UploadVideoTask();
-      videoUploader.execute(path);
-      String uploadUri = null;
-      try {
-        uploadUri = videoUploader.get();
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-        Log.e(LaunchActivity.TAG, "video uploading failed.");
-      } catch (ExecutionException e) {
-        e.printStackTrace();
-        Log.e(LaunchActivity.TAG, "video uploading failed.");
-      }
-      if (uploadUri != null) {
-        Log.d(LaunchActivity.TAG, "Video uploading succeeded.");
-        incidentData.setVideoUri(uploadUri);
-        // Do network operations on a new thread to avoid networkonmainthread
-        // exception.
-        UploadIncidentDataTask incidentUplader = new UploadIncidentDataTask();
-        incidentUplader.execute(incidentData);
-        boolean success = false;
-        try {
-          success = incidentUplader.get();
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-          Log.e(LaunchActivity.TAG, "incident data uploading failed.");
-        } catch (ExecutionException e) {
-          e.printStackTrace();
-          Log.e(LaunchActivity.TAG, "incident data uploading failed.");
-        }
-      }
-    }
+		// In weird case, videoPath might be null.
+		// TODO: submit location as well.
+		String path = incidentData.getVideoFile();
+		String note = incidentData.getNote();
+		Log.d(LaunchActivity.TAG, "video path is " + path
+				+ " and note is " + note);
+		if (path == null) {
+			Log.e(LaunchActivity.TAG, "Video path is null, canceling the report upload process.");
+		} else {
+			final UploadVideoTask videoUploader = new UploadVideoTask();
+			videoUploader.execute(path);
+			Thread t = new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					String uploadUri = null;
+					try {
+						uploadUri = videoUploader.get();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+						Log.e(LaunchActivity.TAG, "video uploading failed.");
+					} catch (ExecutionException e) {
+						e.printStackTrace();
+						Log.e(LaunchActivity.TAG, "video uploading failed.");
+					}
+					if (uploadUri != null) {
+						Log.d(LaunchActivity.TAG, "Video uploading succeeded.");
+						incidentData.setVideoUri(uploadUri);
+					}
+					Log.i("Upload", "Vidoe uploaded"+uploadUri);
+					UploadIncidentDataTask incidentUplader = new UploadIncidentDataTask();
+					incidentUplader.execute(incidentData);
+					boolean success = false;
+
+					try {
+						success = incidentUplader.get();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+						Log.e(LaunchActivity.TAG, "incident data uploading failed.");
+					} catch (ExecutionException e) {
+						e.printStackTrace();
+						Log.e(LaunchActivity.TAG, "incident data uploading failed.");
+					}
+					Log.i("Upload", "Data uploaded"+success);
+				}
+
+
+
+			});
+			t.start();
+		}
+
+		// Do network operations on a new thread to avoid networkonmainthread
+		// exception.
+
 	}
 
 	public void startThankYouAction(){
@@ -142,8 +157,8 @@ public class NotesActivity extends Activity implements LocationListener{
 				Toast.LENGTH_SHORT).show();
 	}
 
-  @Override
-  public void onProviderDisabled(String provider) {
-    Toast.makeText(this, "Disabled provider " + provider, Toast.LENGTH_SHORT).show();
-  }
+	@Override
+	public void onProviderDisabled(String provider) {
+		Toast.makeText(this, "Disabled provider " + provider, Toast.LENGTH_SHORT).show();
+	}
 }
