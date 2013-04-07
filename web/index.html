@@ -15,6 +15,7 @@
   <!-- User-generated css -->
   <style type="text/css">
     #map-canvas { height: 500px }
+    img{max-width: none;}
   </style>
   
   <!-- User-generated js -->
@@ -55,6 +56,21 @@
       var optTextNode = document.createElement('div');
       optTextNode.appendChild(document.createTextNode("Optional content here"));
       infoWindowContent.appendChild(optTextNode);
+
+      var likeSendButton = document.createElement('div');
+      likeSendButton.setAttribute("class", "fb-like");
+      // TODO: update the href links
+      likeSendButton.setAttribute("data-href", "http://philster.x10.bz/phd4/");
+      likeSendButton.setAttribute("data-send", "true");
+      likeSendButton.setAttribute("data-layout", "button_count");
+      likeSendButton.setAttribute("data-width", "450");
+      likeSendButton.setAttribute("data-show-faces", "true");
+      infoWindowContent.appendChild(likeSendButton);
+
+      var spamButton = document.createElement('button');
+      spamButton.setAttribute("onclick", "alert('Spam reported.');return false;");
+      spamButton.appendChild(document.createTextNode("Report Spam"));
+      infoWindowContent.appendChild(spamButton);
 
       var infoWindow = new google.maps.InfoWindow({
 	position: myLatlng,
@@ -166,7 +182,7 @@
     
   <!-- Maps -->
     <div id="map" class="well">
-        <h2>Map for the incidences</h2>
+        <h2>Incident Map</h2>
         <div id="map-canvas"></div>
     </div>
     <br/>
