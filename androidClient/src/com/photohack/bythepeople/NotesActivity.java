@@ -101,10 +101,10 @@ public class NotesActivity extends Activity implements LocationListener{
 						Log.e(LaunchActivity.TAG, "video uploading failed.");
 					}
 					if (uploadUri != null) {
-						Log.d(LaunchActivity.TAG, "Video uploading succeeded.");
+						Log.d(LaunchActivity.TAG, "Video uploading succeeded to \"" +
+                  uploadUri +"\"");
 						incidentData.setVideoUri(uploadUri);
 					}
-					Log.i("Upload", "Vidoe uploaded"+uploadUri);
 					UploadIncidentDataTask incidentUplader = new UploadIncidentDataTask();
 					incidentUplader.execute(incidentData);
 					boolean success = false;

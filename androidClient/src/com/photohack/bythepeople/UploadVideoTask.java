@@ -13,7 +13,12 @@ class UploadVideoTask extends AsyncTask<String, Boolean, String> {
        Log.wtf(LaunchActivity.TAG, "count should have been 1");
      }
      for (int i = 0; i < count; i++) {
-       uri = Utils.uploadVideo(paths[i]);
+       try {
+         uri = Utils.uploadVideo(paths[i]);
+       } catch (Exception e) {
+         e.printStackTrace();
+         return null;
+       }
        publishProgress(true);
      }
      return uri;
