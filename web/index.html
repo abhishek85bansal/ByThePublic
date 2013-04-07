@@ -65,10 +65,13 @@
       likeSendButton.setAttribute("data-layout", "button_count");
       likeSendButton.setAttribute("data-width", "450");
       likeSendButton.setAttribute("data-show-faces", "true");
+      likeSendButton.innerHTML =
+      '<span style="height: 20px; width: 132px;"><iframe id="f1434cf004" name="f27bfff8d" scrolling="no" style="border: none; overflow: hidden; height: 20px; width: 132px;" title="Like this content on Facebook." class="fb_ltr" src="http://www.facebook.com/plugins/like.php?api_key=496562937069311&amp;locale=en_US&amp;sdk=joey&amp;channel_url=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D21%23cb%3Df321cd118%26origin%3Dhttp%253A%252F%252Fphilster.x10.bz%252Ff258b13974%26domain%3Dphilster.x10.bz%26relation%3Dparent.parent&amp;href=http%3A%2F%2Fphilster.x10.bz%2Fphd4%2F&amp;node_type=link&amp;width=450&amp;layout=button_count&amp;colorscheme=light&amp;show_faces=false&amp;send=true&amp;extended_social_context=false"></iframe></span>';
       infoWindowContent.appendChild(likeSendButton);
 
       var spamButton = document.createElement('button');
       spamButton.setAttribute("onclick", "alert('Spam reported.');return false;");
+      crimeImage.setAttribute("style", "float:left;");
       spamButton.appendChild(document.createTextNode("Report Spam"));
       infoWindowContent.appendChild(spamButton);
 
@@ -186,25 +189,7 @@
         <div id="map-canvas"></div>
     </div>
     <br/>
-       
-    <!-- Live Feeds -->
-    <h2>Live Feeds</h2>
-    <div class="content">
-        <!-- <div class="search">
-            <input name="q" id="searchinput" placeholder="Search by zip code or time"
-            value="" type="search">
-        </div> -->
 
-        <ul id="feedlist">
-            <li>
-                <a href="#"><img src="img/crimetape.jpg" alt="image" width="424" height="283" /></a><br/>
-                <p class="description">Caption here</p>
-                <!-- FB Like and Send button -->
-                <div class="fb-like" data-href="http://philster.x10.bz/phd4/" data-send="true" data-layout="button_count" data-width="450" data-show-faces="true"></div>
-                <button onclick="alert('Spam reported.');return false;">Report Spam</button>
-            </li>
-        </ul>
-    </div>
 </div>
 
 </body>
