@@ -47,7 +47,7 @@ public class NotesActivity extends Activity {
     public void submitNoteAndVideo(String videoUri, String note) {
       // In weird case, videoUri might be null.
       Log.d(LaunchActivity.TAG, "videoUri is " + videoUri
-            + "and note is " + note);
+            + " and note is " + note);
     }
 
     public void startThankYouAction(){
