@@ -71,8 +71,6 @@ public class IncidentController {
 	}
 	
 	
-	@GET
-	@Produces(MediaType.)
 	
 	
 	private Incident createNewIncident(String description, String latitude,
