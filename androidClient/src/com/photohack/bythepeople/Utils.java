@@ -44,7 +44,8 @@ public final class Utils {
   private static final String MY_ACCESS_KEY_ID = "AKIAIGE3LGCGLXS3XOAA";
   private static final String MY_SECRET_KEY = "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";
   private static final String AWS_INCIDENT_UPLOAD_URL =
-      "http://ec2-54-224-126-216.compute-1.amazonaws.com:8080/servicearchitecture/rest/incident/new";
+      "http://ec2-54-225-69-4.compute-1.amazonaws.com:8080/servicearchitecture/rest/incident/new";
+      //"http://ec2-54-224-126-216.compute-1.amazonaws.com:8080/servicearchitecture/rest/incident/new";
   private static final String MY_BUCKET = "bythepublic";  // This bucket was manually created using AWS console.
   private static SecureRandom random = new SecureRandom();
 
